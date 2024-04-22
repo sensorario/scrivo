@@ -1,0 +1,10 @@
+services:
+  node:
+    container_name: node
+    image: node:20
+    working_dir: /scrivo
+    volumes:
+      - ./scrivo:/scrivo
+    ports:
+      - "3003:3000"
+    command: npm run dev
