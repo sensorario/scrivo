@@ -1,3 +1,8 @@
 .main {
     padding: 6px;
 }
+
+.link {
+    text-decoration: none;
+    color: darkcyan;
+}

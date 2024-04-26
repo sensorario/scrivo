@@ -2,3 +2,15 @@
   padding: 0;
   margin: 0;
 }
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
