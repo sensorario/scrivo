@@ -1,8 +1,8 @@
 "use client";
 
 import styles from "./page.module.css";
-import { TextField, Button, Stack, Paper, styled, Grid } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import { Paper, styled, Grid } from "@mui/material";
+import React, { useState } from "react";
 import Divider from "@mui/material/Divider";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
@@ -11,6 +11,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Typography from "@mui/material/Typography";
 import { Create, GitHub } from "@mui/icons-material";
 import Link from "next/link";
+import TextField from "@/src/components/TextField";
 
 export default function Home() {
   const [isCreationActive, setCreationVisibility] = useState(false);
@@ -27,9 +28,7 @@ export default function Home() {
             <ListItemIcon>
               <Create fontSize="small" />
             </ListItemIcon>
-            <ListItemText onClick={toggleArticle}>
-              Crea nuovo articolo
-            </ListItemText>
+            <ListItemText onClick={toggleArticle}>Scrivi bozza</ListItemText>
             <Typography variant="body2" color="text.secondary">
               ⌘N
             </Typography>
@@ -54,45 +53,6 @@ export default function Home() {
     );
   };
 
-  const ref = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("current.article");
-    if (saved && ref.current) {
-      ref.current.value = saved;
-    }
-  }, []);
-
-  const renderDetails = () => {
-    return (
-      <div className="detail">
-        <h2>Aggiungi contenuti al tuo articolo!</h2>
-        <TextField
-          id="filled-textarea"
-          label="Contenuto articolo"
-          placeholder="Scrivi qui il tuo articolo"
-          multiline
-          fullWidth
-          variant="filled"
-          inputRef={ref}
-          defaultValue={localStorage.getItem("current.article")}
-        />
-
-        <Stack spacing={2} direction="row">
-          <Button
-            variant="contained"
-            onClick={() => {
-              if (ref.current)
-                localStorage.setItem("current.article", ref.current.value);
-            }}
-          >
-            salva bozza
-          </Button>
-        </Stack>
-      </div>
-    );
-  };
-
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -106,14 +66,12 @@ export default function Home() {
       <h1>Scrivo!</h1>
       <div className="row">
         <Grid container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Item>{renderSidebar()}</Item>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={10}>
             <Item>
-              {isCreationActive
-                ? renderDetails()
-                : "Pronto per scrivere un po?"}
+              {isCreationActive ? <TextField /> : "Pronto per scrivere un po?"}
             </Item>
           </Grid>
         </Grid>
