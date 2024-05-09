@@ -1,11 +1,10 @@
 import { TextField as MUITextField, Button, Stack } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { Wrap } from "./style";
-import { leggiBozza, salvaBozza } from "@/actions";
+import { converti, genera, salvaBozza } from "@/actions";
 
 export default function TextField() {
   const ref = useRef<HTMLInputElement>(null);
-  const [originale, setOriginale] = useState("");
 
   useEffect(() => {
     const saved = localStorage.getItem("current.article");
@@ -49,6 +48,23 @@ export default function TextField() {
             }}
           >
             salva bozza
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              converti();
+            }}
+          >
+            converti
+          </Button>
+          <Button
+            variant="contained"
+            onClick={async () => {
+              const generato = await genera();
+              console.log(generato);
+            }}
+          >
+            genera pdf
           </Button>
         </Stack>
       </div>

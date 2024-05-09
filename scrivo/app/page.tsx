@@ -63,8 +63,8 @@ export default function Home() {
 
   return (
     <div className={styles.main}>
-      <h1>Scrivo!</h1>
-      <div className="row">
+      <div className="container row">
+        <h1>Scrivo!</h1>
         <Grid container spacing={2}>
           <Grid item xs={2}>
             <Item>{renderSidebar()}</Item>

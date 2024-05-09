@@ -8,3 +8,11 @@ services:
     ports:
       - "3003:3000"
     command: npm run dev
+
+  latex:
+    container_name: latex
+    volumes:
+      - ./scrivo:/scrivo
+    build:
+      context: ./docker/latex
+      dockerfile: ./Dockerfile
